@@ -2,7 +2,7 @@
 
 An [OpenCode](https://opencode.ai) TUI plugin that renders the [Starship](https://starship.rs) shell prompt in the footer with full ANSI color support.
 
-![oc-starship in action](./public/image.png)
+![oc-starship in action](https://raw.githubusercontent.com/mastondzn/oc-starship/main/public/image.png)
 
 ## Requirements
 
