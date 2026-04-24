@@ -1,0 +1,23 @@
+{
+  "name": "oc-starship",
+  "version": "0.0.1",
+  "type": "module",
+  "exports": {
+    "./tui": {
+      "import": "./index.tsx"
+    }
+  },
+  "files": [
+    "index.ts"
+  ],
+  "peerDependencies": {
+    "@opencode-ai/plugin": "*",
+    "@opentui/core": "*",
+    "@opentui/solid": "*",
+    "solid-js": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "@types/bun": "latest"
+  }
+}
