@@ -184,6 +184,7 @@ function StarshipLine(props: {
   interval: number;
   version: string;
   defaultColor: RGBA;
+  opencodeVersionStyle: "short" | "verbose" | "off";
 }) {
   let textRef: TextRenderable | undefined;
   let intervalId: ReturnType<typeof setInterval>;
@@ -212,6 +213,13 @@ function StarshipLine(props: {
 
   onCleanup(() => clearInterval(intervalId));
 
+  const versionLabel =
+    props.opencodeVersionStyle === "short"
+      ? `v${props.version}`
+      : props.opencodeVersionStyle === "verbose"
+        ? `opencode v${props.version}`
+        : null;
+
   return (
     <box height={1} flexDirection="row" justifyContent="space-between">
       <text
@@ -219,7 +227,7 @@ function StarshipLine(props: {
           textRef = el as TextRenderable;
         }}
       />
-      <text content={`opencode v${props.version}`} fg={props.defaultColor} />
+      {versionLabel && <text content={versionLabel} fg={props.defaultColor} />}
     </box>
   );
 }
@@ -227,9 +235,11 @@ function StarshipLine(props: {
 const tui: TuiPlugin = async (api, options) => {
   const opts = (options ?? {}) as {
     interval?: number;
+    opencodeVersionStyle?: "short" | "verbose" | "off";
   };
 
   const interval = Math.max(500, opts.interval ?? 2000);
+  const opencodeVersionStyle = opts.opencodeVersionStyle ?? "verbose";
   const cwd = api.state.path.directory ?? process.cwd();
 
   api.slots.register({
@@ -240,6 +250,7 @@ const tui: TuiPlugin = async (api, options) => {
           interval={interval}
           version={api.app.version}
           defaultColor={api.theme.current.textMuted}
+          opencodeVersionStyle={opencodeVersionStyle}
         />
       ),
     },

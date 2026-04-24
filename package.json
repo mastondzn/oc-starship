@@ -8,7 +8,7 @@
     }
   },
   "files": [
-    "index.ts"
+    "index.tsx"
   ],
   "peerDependencies": {
     "@opencode-ai/plugin": "*",
